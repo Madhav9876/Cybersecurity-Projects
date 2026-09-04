@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Analyzer | Phishing Awareness — DecodeLabs</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <span class="logo-icon">🛡️</span>
+    <span>DecodeLabs — CyberSec Project 3</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="analyze.html" class="active">Analyzer</a></li>
+    <li><a href="checklist.html">Red Flag Checklist</a></li>
+    <li><a href="simulation.html">Simulations</a></li>
+    <li><a href="triage.html">Triage Toolkit</a></li>
+  </ul>
+</nav>
+
+<section class="hero" style="padding:3rem 2rem;">
+  <h1>🔬 Phishing Email <span>Analyzer</span></h1>
+  <p>Paste any email or message below. The analyzer will scan for phishing keywords, suspicious URLs, spoofed domains, dangerous attachments, and psychological manipulation tactics.</p>
+</section>
+
+<main>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:start;">
+
+    <!-- INPUT PANEL -->
+    <div>
+      <div class="card">
+        <h2 class="section-title" style="margin-bottom:0.3rem;">Paste Email / Message</h2>
+        <p class="section-sub">Include headers (From, Subject, To) for the most accurate analysis.</p>
+
+        <!-- Sample loaders -->
+        <div style="margin-bottom:1rem;">
+          <p style="font-size:0.85rem; font-weight:600; color:var(--muted); margin-bottom:6px;">Load a sample:</p>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button class="btn btn-outline" style="background:var(--primary); color:#fff; font-size:0.8rem; padding:6px 12px;" data-sample="bec">🐋 BEC / CEO Fraud</button>
+            <button class="btn btn-outline" style="background:var(--primary); color:#fff; font-size:0.8rem; padding:6px 12px;" data-sample="mass">🌊 Mass Phishing</button>
+            <button class="btn btn-outline" style="background:var(--primary); color:#fff; font-size:0.8rem; padding:6px 12px;" data-sample="spear">🎯 Spear Phishing</button>
+            <button class="btn btn-outline" style="background:#2e7d32; color:#fff; font-size:0.8rem; padding:6px 12px;" data-sample="safe">✅ Safe Email</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email-input">Email Content</label>
+          <textarea id="email-input" rows="16" placeholder="Paste the full email here including From:, To:, Subject:, and body..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-danger" id="analyze-btn">🔍 Analyze Now</button>
+          <button class="btn btn-outline" id="clear-btn" style="background:#6b7280; color:#fff;">🗑️ Clear</button>
+        </div>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div class="card mt-3">
+        <h3 style="margin-bottom:1rem;">🧠 What the Analyzer Checks</h3>
+        <ul class="flag-list">
+          <li class="flag-item">
+            <span class="flag-icon">🔤</span>
+            <div class="flag-content">
+              <h4>Phishing Keywords</h4>
+              <p>Urgency, authority, fear/greed, credential prompts, bypass requests, BEC patterns</p>
+            </div>
+          </li>
+          <li class="flag-item">
+            <span class="flag-icon">🔗</span>
+            <div class="flag-content">
+              <h4>URL Analysis</h4>
+              <p>Suspicious TLDs, lookalike domains, subdomain traps, URL shorteners, IP-based links, non-HTTPS</p>
+            </div>
+          </li>
+          <li class="flag-item">
+            <span class="flag-icon">📧</span>
+            <div class="flag-content">
+              <h4>Sender / Header Analysis</h4>
+              <p>Free-email providers, spoofed domains, display name vs. actual address mismatch</p>
+            </div>
+          </li>
+          <li class="flag-item">
+            <span class="flag-icon">📎</span>
+            <div class="flag-content">
+              <h4>Attachment Detection</h4>
+              <p>Dangerous extensions (.exe, .js, .iso, .scr, .lnk), HTML smuggling indicators</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RESULTS PANEL -->
+    <div>
+      <div class="card">
+        <h2 class="section-title" style="margin-bottom:0.3rem;">Analysis Results</h2>
+        <p class="section-sub">Risk score and detected indicators will appear here.</p>
+
+        <!-- Score meter (always visible) -->
+        <div style="margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-weight:600; font-size:0.9rem;">Risk Score</span>
+            <span style="font-weight:800; font-size:1.1rem;" id="score-num">0</span>
+          </div>
+          <div class="score-bar-bg">
+            <div class="score-bar-fill fill-safe" id="score-bar" style="width:0%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:0.75rem; color:var(--muted);">
+            <span>0 — Safe</span>
+            <span>20 — Suspicious</span>
+            <span>50+ — Malicious</span>
+          </div>
+        </div>
+
+        <!-- Verdict + findings -->
+        <div id="result-box" class="result-box">
+          <div class="result-title" id="verdict-title"></div>
+          <div style="margin-top:1rem;">
+            <strong style="font-size:0.9rem; display:block; margin-bottom:8px;">Detected Indicators:</strong>
+            <ul class="flag-list" id="findings-list"></ul>
+          </div>
+
+          <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(0,0,0,0.08);">
+            <strong style="font-size:0.9rem;">Recommended Action:</strong>
+            <div id="action-text" style="margin-top:6px; font-size:0.9rem; color:var(--muted);"></div>
+          </div>
+        </div>
+
+        <!-- Placeholder before analysis -->
+        <div id="placeholder" style="text-align:center; padding:3rem 1rem; color:var(--muted);">
+          <div style="font-size:3rem; margin-bottom:1rem;">📋</div>
+          <p>Paste an email on the left and click <strong>Analyze Now</strong> to see results.</p>
+        </div>
+      </div>
+
+      <!-- QUICK REFERENCE -->
+      <div class="card mt-3">
+        <h3 style="margin-bottom:1rem;">⚡ Quick Domain Checks</h3>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:1rem;">Techniques to spot lookalike domains manually:</p>
+        <div style="display:grid; gap:8px;">
+          <div style="padding:10px 14px; background:#f8fafc; border-radius:8px; border-left:3px solid #1565c0;">
+            <strong style="font-size:0.88rem;">Typosquatting</strong>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:2px;">amaz<span style="color:#c62828; font-weight:700;">0</span>n.com — letters replaced with numbers</p>
+          </div>
+          <div style="padding:10px 14px; background:#f8fafc; border-radius:8px; border-left:3px solid #e65100;">
+            <strong style="font-size:0.88rem;">Homoglyph Attack</strong>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:2px;">p<span style="color:#c62828; font-weight:700; font-style:italic;">а</span>ypal.com — Cyrillic 'а' looks identical to Latin 'a'</p>
+          </div>
+          <div style="padding:10px 14px; background:#f8fafc; border-radius:8px; border-left:3px solid #c62828;">
+            <strong style="font-size:0.88rem;">Combosquatting</strong>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:2px;">yourcompany<span style="color:#c62828; font-weight:700;">-secure-login</span>.com — security words appended</p>
+          </div>
+          <div style="padding:10px 14px; background:#f8fafc; border-radius:8px; border-left:3px solid #6a1b9a;">
+            <strong style="font-size:0.88rem;">Subdomain Trap</strong>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:2px;">www.decodelabs.tech.<span style="color:#c62828; font-weight:700;">login-update.com</span> — read right to left!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <strong>DecodeLabs</strong> &nbsp;|&nbsp; Cyber Security Project 3: Phishing Awareness Analysis &nbsp;|&nbsp; Batch 2026
+</footer>
+
+<script src="js/analyzer.js"></script>
+<script>
+  // Override renderResults to also update action text and hide placeholder
+  const _orig = renderResults;
+  window.renderResults = function(result) {
+    document.getElementById('placeholder').style.display = 'none';
+    _orig(result);
+    const actions = {
+      'MALICIOUS': '🚨 Do NOT click any links or open attachments. Report immediately using the security plugin. Block sender domain and escalate to the security team.',
+      'SUSPICIOUS': '⚠️ Treat with caution. Verify through an out-of-band channel. Do not fulfil any requests until confirmed. Report to IT security.',
+      'LIKELY SAFE': '✅ No known indicators detected. Stay alert — use Pause, Verify, Report for any unexpected or sensitive requests.'
+    };
+    document.getElementById('action-text').textContent = actions[result.verdict] || '';
+  };
+</script>
+</body>
+</html>

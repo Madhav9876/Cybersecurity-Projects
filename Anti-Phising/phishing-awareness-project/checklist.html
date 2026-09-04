@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Red Flag Checklist | Phishing Awareness — DecodeLabs</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <span class="logo-icon">🛡️</span>
+    <span>DecodeLabs — CyberSec Project 3</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="analyze.html">Analyzer</a></li>
+    <li><a href="checklist.html" class="active">Red Flag Checklist</a></li>
+    <li><a href="simulation.html">Simulations</a></li>
+    <li><a href="triage.html">Triage Toolkit</a></li>
+  </ul>
+</nav>
+
+<section class="hero" style="padding:3rem 2rem;">
+  <h1>✅ Red Flag <span>Checklist</span></h1>
+  <p>Work through all documented red flags from modern attack research. Check each indicator you find in a suspicious message and get a live threat score with a recommended action.</p>
+</section>
+
+<main>
+  <div style="display:grid; grid-template-columns: 1fr 340px; gap:2rem; align-items:start;">
+
+    <!-- CHECKLIST -->
+    <div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:10px;">
+        <div>
+          <h2 class="section-title">Threat Indicator Checklist</h2>
+          <p class="section-sub">Check every red flag you can identify in the suspicious message.</p>
+        </div>
+        <button class="btn btn-outline" id="reset-btn" style="background:#6b7280; color:#fff;">🔄 Reset All</button>
+      </div>
+
+      <div id="checklist-container"></div>
+    </div>
+
+    <!-- SCORE SIDEBAR -->
+    <div style="position:sticky; top:80px;">
+      <div class="card" style="border-top: 4px solid var(--primary);">
+        <h3 style="margin-bottom:1.2rem; text-align:center;">📊 Live Threat Score</h3>
+
+        <div style="text-align:center; margin-bottom:1rem;">
+          <div style="font-size:3.5rem; font-weight:800; color:var(--primary);" id="score-display">0</div>
+          <div style="font-size:0.85rem; color:var(--muted);">/ 100 Risk Points</div>
+        </div>
+
+        <div class="score-meter" style="margin-bottom:0.5rem;">
+          <div class="score-bar-bg">
+            <div class="score-bar-fill fill-safe" id="checklist-bar" style="width:0%;"></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--muted); margin-bottom:1.2rem;">
+          <span>Safe</span><span>Suspicious</span><span>Malicious</span>
+        </div>
+
+        <div style="text-align:center; padding:12px; background:#f8fafc; border-radius:8px; margin-bottom:1rem;">
+          <span id="flags-count" style="font-size:1.8rem; font-weight:800; color:var(--accent);">0</span>
+          <div style="font-size:0.82rem; color:var(--muted);">flags identified</div>
+        </div>
+
+        <div id="verdict-box" class="result-box" style="margin-top:0;">
+          <div class="result-title" id="verdict-text" style="font-size:1rem;"></div>
+          <div id="verdict-action" style="font-size:0.85rem; margin-top:8px; color:var(--muted);"></div>
+        </div>
+
+        <div style="margin-top:1rem;">
+          <a href="triage.html" class="btn btn-primary" style="width:100%; justify-content:center;">🌳 Open Triage Tool</a>
+        </div>
+      </div>
+
+      <!-- COGNITIVE TRIGGERS REFERENCE -->
+      <div class="card mt-3">
+        <h3 style="margin-bottom:1rem; font-size:0.95rem;">🧠 Cognitive Triggers</h3>
+        <div style="display:grid; gap:8px;">
+          <div style="padding:8px 12px; background:#fff3e0; border-radius:8px; border-left:3px solid #e65100;">
+            <strong style="font-size:0.85rem;">⏱️ Urgency</strong>
+            <p style="font-size:0.78rem; color:var(--muted);">Artificial time pressure that triggers fight-or-flight</p>
+          </div>
+          <div style="padding:8px 12px; background:#e3f2fd; border-radius:8px; border-left:3px solid #1565c0;">
+            <strong style="font-size:0.85rem;">🏛️ Authority</strong>
+            <p style="font-size:0.78rem; color:var(--muted);">Impersonating C-suite, IT, or law enforcement</p>
+          </div>
+          <div style="padding:8px 12px; background:#f3e5f5; border-radius:8px; border-left:3px solid #6a1b9a;">
+            <strong style="font-size:0.85rem;">👁️ Curiosity</strong>
+            <p style="font-size:0.78rem; color:var(--muted);">Exploiting need to fill knowledge gaps</p>
+          </div>
+          <div style="padding:8px 12px; background:#ffebee; border-radius:8px; border-left:3px solid #c62828;">
+            <strong style="font-size:0.85rem;">⚖️ Fear / Greed</strong>
+            <p style="font-size:0.78rem; color:var(--muted);">Threatening penalties or promising rewards</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <strong>DecodeLabs</strong> &nbsp;|&nbsp; Cyber Security Project 3: Phishing Awareness Analysis &nbsp;|&nbsp; Batch 2026
+</footer>
+
+<script src="js/checklist.js"></script>
+</body>
+</html>
