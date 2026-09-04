@@ -6,6 +6,16 @@ Short description: It consists of projects I have done related to cybersecurity.
 
 ---
 
+## Projects
+
+- [Anti-Phising](./Anti-Phising) — Phishing analysis and detection tools (proofs-of-concept, detection heuristics, and sample datasets).
+- [Audited System](./Audited%20System) — Security audit reports, findings, and remediation notes from system audits.
+- [Decode](./Decode) — (Single-file project / notes) Contains decoding tools or write-ups. Inspect the file for details.
+- [LockScore](./LockScore) — Password strength checker with offline leaked-password detection and score breakdowns.
+- [ShieldCode](./ShieldCode) — Educational encryption toolkit demonstrating Caesar and Vigenère ciphers.
+
+---
+
 ## Table of Contents
 
 - [About](#about)
@@ -140,15 +150,13 @@ Please avoid adding sensitive data (passwords, private keys, active C2 details).
 
 ## License
 
-This repository is released under the MIT License. Add a `LICENSE` file to the repo root. If you prefer another license, replace accordingly.
+This repository is released under the MIT License. See the `LICENSE` file in the root for details.
 
 ---
 
 ## Contact
 
 Madhav (GitHub): https://github.com/Madhav9876
-
-If you'd like me to add or tailor this README to reflect the exact projects in this repository, tell me which project names and short descriptions to include — I can update the file and commit it for you.
 
 ---
 
